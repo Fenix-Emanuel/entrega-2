@@ -1,0 +1,41 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f6f7fb;
+}
+
+header,footer {
+    background: #fff;
+}
+
+.imagenes {
+  height: 700px;           /* el tamaño que ya te gusta */
+  overflow: hidden;
+}
+
+/* el carousel sí ocupa todo */
+.imagenes .carousel,
+.imagenes .carousel-inner,
+.imagenes .carousel-item {
+  height: 100%;
+}
+
+/* 🚨 ACÁ ESTÁ LA CLAVE */
+.imagenes img {
+  max-height: 100%;
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  object-fit: cover;     /* no recorta */
+  margin: 0 auto;          /* centra horizontal */
+  display: block;
+}
+
+.section2 {
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
