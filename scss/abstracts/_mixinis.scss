@@ -1,0 +1,15 @@
+@mixin transition($props...) {
+  transition: $props;
+}
+
+@mixin hover-lift(
+  $y: -6px,
+  $shadow: 0 18px 35px rgba(0, 0, 0, 0.18)
+) {
+  @include transition(transform .2s ease, box-shadow .2s ease);
+
+  &:hover {
+    transform: translateY($y);
+    box-shadow: $shadow;
+  }
+}
