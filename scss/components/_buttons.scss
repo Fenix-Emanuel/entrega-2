@@ -1,0 +1,20 @@
+@use "../abstracts/variables" as v;
+
+.btn-primary {
+  background-color: v.$primary;
+  border-color: v.$primary;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+
+  &:hover {
+    background-color: v.$primary-dark;
+    border-color: v.$primary-dark;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(44, 161, 161, 0.35);
+  }
+
+  &:active {
+    background-color: v.$primary-darker;
+    border-color: v.$primary-darker;
+  }
+}
