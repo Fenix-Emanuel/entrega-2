@@ -1,125 +1,634 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/styles.css">
-    <title>Balance Performance</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d1112">
+<meta property="og:title" content="Balance Performance">
+<meta property="og:description" content="Entrenamiento, nutrición y suplementación bajo un mismo método. 100% online.">
+<meta property="og:image" content="img/og-balance.jpg">
+<link rel="preload" as="image" href="img/entrenamiento-en-el-gimnasio-moderno.webp" fetchpriority="high">
+<title>Balance Performance</title>
+<meta name="description" content="Balance Performance: entrenamiento personalizado, nutrición y suplementación bajo un mismo método. 100% online desde Round Rock, TX.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600&display=swap">
+<style>
+/* Concepto: "vestuario de alto rendimiento" — grafito frío, luz de estadio y el turquesa
+   de la marca. Palabras gigantes condensadas, una sola toma continua al hacer scroll. */
+:root {
+  --ink: #0d1112;          /* fondo grafito con sesgo turquesa */
+  --ink-2: #151b1c;        /* superficies elevadas */
+  --line: #263031;         /* divisores */
+  --bone: #ebe8e1;         /* texto principal / estudio de producto */
+  --mute: #8e9a99;         /* texto secundario */
+  --teal: #38c3bb;         /* acento de marca (swoosh Balance) */
+  --teal-deep: #1f7f7a;
+  --f-display: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+  --f-body: "Barlow", "Helvetica Neue", Arial, sans-serif;
+  --f-label: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --gut: max(16px, env(safe-area-inset-left, 0px));
+  --gut-r: max(16px, env(safe-area-inset-right, 0px));
+  --ease: cubic-bezier(.2,.7,.1,1);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { background: var(--ink); }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+body {
+  margin: 0; background: var(--ink); color: var(--bone);
+  font: 400 17px/1.6 var(--f-body);
+  -webkit-font-smoothing: antialiased; overflow-x: clip;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+p { margin: 0; }
+.wrap { width: 100%; max-width: 1320px; margin-inline: auto; padding-left: var(--gut); padding-right: var(--gut-r); }
+.label {
+  font: 600 13px/1 var(--f-label); letter-spacing: .18em; text-transform: uppercase; color: var(--mute);
+}
+.label b { color: var(--teal); font-weight: 600; }
+.display { font-family: var(--f-display); font-weight: 900; text-transform: uppercase; line-height: .82; letter-spacing: -.01em; }
+
+/* Grano de película sobre toda la página */
+body::after {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 60; opacity: .07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--ink); }
+
+/* Botones */
+.btn {
+  display: inline-flex; align-items: center; gap: .6em; padding: 15px 26px;
+  font: 600 15px/1 var(--f-label); letter-spacing: .14em; text-transform: uppercase; text-decoration: none;
+  background: var(--teal); color: var(--ink); border: 0; border-radius: 2px; cursor: pointer;
+  transition: background .3s var(--ease), transform .3s var(--ease);
+}
+.btn:hover { background: var(--bone); transform: translateY(-2px); }
+.btn svg { width: 16px; height: 16px; transition: transform .3s var(--ease); }
+.btn:hover svg { transform: translateX(4px); }
+.btn--ghost { background: transparent; color: var(--bone); box-shadow: inset 0 0 0 1px rgba(235,232,225,.35); }
+.btn--ghost:hover { background: var(--bone); color: var(--ink); }
+
+/* ───────── NAV ───────── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  padding-top: calc(env(safe-area-inset-top, 0px) + 18px); padding-bottom: 18px;
+  transition: background .4s var(--ease), padding .4s var(--ease);
+}
+.nav.is-solid { background: rgba(13,17,18,.86); backdrop-filter: blur(10px); padding-bottom: 12px; padding-top: calc(env(safe-area-inset-top, 0px) + 12px); }
+.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.brand { font: 900 26px/1 var(--f-display); letter-spacing: .02em; text-decoration: none; transform: skewX(-10deg); display: inline-block; }
+.brand span { color: var(--teal); }
+.nav ul { display: flex; gap: 30px; list-style: none; margin: 0; padding: 0; }
+.nav ul a { font: 500 15px/1 var(--f-label); letter-spacing: .14em; text-transform: uppercase; text-decoration: none; color: var(--mute); transition: color .25s; }
+.nav ul a:hover { color: var(--bone); }
+.nav .btn { padding: 12px 18px; font-size: 14px; }
+@media (max-width: 860px) { .nav ul { display: none; } }
+
+/* ───────── HERO ───────── */
+.hero { position: relative; height: 100svh; min-height: 560px; overflow: hidden; }
+.hero__media { position: absolute; inset: 0; }
+.hero__media img { width: 100%; height: 100%; object-fit: cover; object-position: 60% 30%; transform: scale(1.12); filter: saturate(.75) contrast(1.05) brightness(1); }
+.hero__shade { position: absolute; inset: 0; background:
+  linear-gradient(180deg, rgba(13,17,18,.55) 0%, rgba(13,17,18,.15) 35%, rgba(13,17,18,.55) 70%, var(--ink) 100%),
+  linear-gradient(90deg, rgba(13,17,18,.6), transparent 60%); }
+.hero__inner { position: relative; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding-block: 120px 40px; }
+.hero__word { font-size: clamp(84px, 21.5vw, 360px); white-space: nowrap; margin-left: -.03em; will-change: transform; }
+.hero__word .ch { display: inline-block; }
+.hero__word .ch.t { color: var(--teal); }
+.hero__foot { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; margin-top: 28px; padding-top: 22px; border-top: 1px solid rgba(235,232,225,.2); }
+.hero__foot p { max-width: 34ch; font-size: clamp(17px, 1.6vw, 21px); line-height: 1.45; }
+.hero__actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero .label { margin-bottom: 18px; }
+
+/* ───────── CINTA (ticker) ───────── */
+.ticker { border-block: 1px solid var(--line); overflow: hidden; padding-block: 18px; background: var(--ink); }
+.ticker__row { display: flex; gap: 48px; white-space: nowrap; width: max-content; font: 800 clamp(30px, 4.6vw, 64px)/1 var(--f-display); text-transform: uppercase; }
+.ticker__row span:nth-child(even) { color: transparent; -webkit-text-stroke: 1px var(--mute); }
+
+/* ───────── MANIFIESTO ───────── */
+.manifesto { padding-block: clamp(96px, 16vw, 200px); }
+.manifesto .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 3fr); gap: 40px; }
+.manifesto__text { font: 600 clamp(30px, 4.2vw, 60px)/1.08 var(--f-display); text-transform: uppercase; letter-spacing: .005em; }
+.manifesto__text .w { opacity: var(--wo, 1); transition: none; }
+.manifesto__text em { font-style: normal; color: var(--teal); }
+.manifesto__sign { margin-top: 36px; color: var(--mute); max-width: 52ch; }
+@media (max-width: 760px) { .manifesto .wrap { grid-template-columns: minmax(0,1fr); gap: 20px; } }
+
+/* ───────── MÉTODO (paneles horizontales) ───────── */
+.metodo { position: relative; background: var(--ink); }
+.metodo__head { padding-block: 0 40px; display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; }
+.metodo__head h2 { font: 800 clamp(40px, 5vw, 72px)/.9 var(--f-display); text-transform: uppercase; }
+.metodo__track { display: flex; flex-direction: column; gap: 16px; padding-left: var(--gut); padding-right: var(--gut-r); }
+.panel { position: relative; overflow: hidden; border-radius: 4px; min-height: 78svh; display: flex; align-items: flex-end; isolation: isolate; }
+.panel img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; filter: saturate(.7); }
+.panel::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(13,17,18,.1) 30%, rgba(13,17,18,.92)); }
+.panel__body { padding: clamp(22px, 3vw, 44px); width: 100%; display: grid; gap: 18px; }
+.panel__word { font-size: clamp(76px, 13vw, 210px); }
+.panel__row { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; }
+.panel__row p { max-width: 40ch; color: var(--bone); }
+.panel .label { color: var(--bone); opacity: .8; }
+@media (min-width: 900px) {
+  .metodo.is-h { height: 100svh; overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
+  .metodo.is-h .metodo__track { flex-direction: row; width: max-content; gap: 20px; }
+  .metodo.is-h .panel { width: min(78vw, 1100px); min-height: 0; height: 68svh; flex: none; }
+  .metodo.is-h .panel img { width: 120%; max-width: none; left: -10%; }
+}
+
+/* ───────── PROGRAMAS ───────── */
+.programas { padding-block: clamp(100px, 14vw, 180px) 60px; }
+.sec-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-bottom: 48px; }
+.sec-head h2 { font: 800 clamp(48px, 7vw, 108px)/.86 var(--f-display); text-transform: uppercase; }
+.sec-head p { max-width: 38ch; color: var(--mute); }
+.prog { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.prog li { border-bottom: 1px solid var(--line); }
+.prog a {
+  display: grid; grid-template-columns: 120px minmax(0, 1.2fr) minmax(0, 1fr) auto; gap: 28px; align-items: center;
+  padding-block: 26px; text-decoration: none; position: relative;
+}
+.prog__thumb { width: 120px; aspect-ratio: 3/2; overflow: hidden; border-radius: 2px; }
+.prog__thumb img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.1); transition: filter .5s var(--ease), transform .6s var(--ease); }
+.prog h3 { font: 800 clamp(30px, 3.6vw, 52px)/.95 var(--f-display); text-transform: uppercase; transition: color .3s, transform .45s var(--ease); }
+.prog p { color: var(--mute); font-size: 16px; }
+.prog .sample { margin-top: 10px; font: 500 14px/1.5 var(--f-label); letter-spacing: .06em; color: var(--bone); opacity: .75; font-variant-numeric: tabular-nums; }
+.prog__go { width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; box-shadow: inset 0 0 0 1px var(--line); transition: background .3s, box-shadow .3s; }
+.prog__go svg { width: 18px; height: 18px; transition: transform .35s var(--ease); }
+.prog a:hover h3 { color: var(--teal); transform: translateX(10px); }
+.prog a:hover .prog__thumb img { filter: none; transform: scale(1.08); }
+.prog a:hover .prog__go { background: var(--teal); color: var(--ink); box-shadow: none; }
+.prog a:hover .prog__go svg { transform: rotate(-45deg); }
+@media (max-width: 860px) {
+  .prog a { grid-template-columns: 88px minmax(0, 1fr); gap: 8px 18px; }
+  .prog__thumb { width: 88px; grid-row: span 2; align-self: start; }
+  .prog__go { display: none; }
+}
+
+/* ───────── TIENDA ───────── */
+.tienda { padding-block: 80px clamp(100px, 12vw, 160px); }
+.shelf-title { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin: 56px 0 20px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+.shelf-title h3 { font: 800 clamp(28px, 3vw, 40px)/1 var(--f-display); text-transform: uppercase; }
+.grid4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 1000px) { .grid4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.prod { display: grid; gap: 14px; }
+.prod__img { position: relative; aspect-ratio: 4/5; overflow: hidden; border-radius: 3px; background: var(--ink-2); }
+.prod__img img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s var(--ease); }
+.prod--studio .prod__img { background: var(--bone); }
+.prod--studio .prod__img img { object-fit: contain; mix-blend-mode: multiply; padding: 8% 6%; }
+.prod:hover .prod__img img { transform: scale(1.05); }
+.prod__tag { position: absolute; top: 12px; left: 12px; font: 600 12px/1 var(--f-label); letter-spacing: .14em; text-transform: uppercase; padding: 7px 9px; background: var(--ink); color: var(--bone); border-radius: 2px; }
+.prod h4 { margin: 0; font: 800 26px/1 var(--f-display); text-transform: uppercase; }
+.prod p { color: var(--mute); font-size: 15px; line-height: 1.5; }
+.prod button { justify-self: start; background: none; border: 0; padding: 4px 0; color: var(--teal); cursor: pointer; font: 600 14px/1 var(--f-label); letter-spacing: .14em; text-transform: uppercase; border-bottom: 1px solid currentColor; }
+.prod button:hover { color: var(--bone); }
+
+/* ───────── NOSOTROS ───────── */
+.nosotros { padding-block: 40px clamp(100px, 12vw, 160px); }
+.nosotros .wrap { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 80px); align-items: center; }
+.nosotros__img { overflow: hidden; border-radius: 3px; aspect-ratio: 3/2; }
+.nosotros__img img { width: 100%; height: 115%; object-fit: cover; filter: saturate(.8); }
+.nosotros h2 { font: 800 clamp(44px, 5.6vw, 84px)/.88 var(--f-display); text-transform: uppercase; margin: 18px 0 24px; }
+.nosotros p + p { margin-top: 16px; }
+.nosotros p { color: #c6cac6; max-width: 54ch; }
+.facts { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--line); }
+.facts strong { display: block; font: 800 clamp(30px, 3.2vw, 44px)/1 var(--f-display); text-transform: uppercase; color: var(--bone); margin-bottom: 8px; }
+.facts span { font: 500 13px/1.3 var(--f-label); letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
+@media (max-width: 860px) { .nosotros .wrap { grid-template-columns: minmax(0, 1fr); } }
+
+/* ───────── CONTACTO ───────── */
+.contacto { position: relative; padding-block: clamp(90px, 12vw, 150px) 90px; background: var(--ink-2); overflow: hidden; }
+.contacto__word { font-size: clamp(96px, 24vw, 400px); color: var(--teal); white-space: nowrap; margin-left: -.04em; line-height: .78; }
+.contacto__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: clamp(32px, 6vw, 96px); margin-top: 56px; }
+.contacto__info h2 { font: 800 clamp(34px, 3.4vw, 50px)/.95 var(--f-display); text-transform: uppercase; margin-bottom: 18px; }
+.contacto__info > p { color: var(--mute); max-width: 40ch; }
+.dl { margin: 32px 0 0; display: grid; gap: 0; }
+.dl div { display: grid; grid-template-columns: 110px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding-block: 14px; border-top: 1px solid var(--line); }
+.dl dt { font: 600 13px/1 var(--f-label); letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+.dl dd { margin: 0; user-select: all; overflow-wrap: anywhere; }
+.dl a { text-decoration-color: var(--teal); text-underline-offset: 4px; }
+.copy { background: none; border: 1px solid var(--line); color: var(--mute); padding: 7px 10px; border-radius: 2px; cursor: pointer; font: 600 12px/1 var(--f-label); letter-spacing: .12em; text-transform: uppercase; }
+.copy:hover { color: var(--bone); border-color: var(--mute); }
+.form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 18px; }
+.field { display: grid; gap: 8px; }
+.field--full { grid-column: 1 / -1; }
+.field label { font: 600 13px/1 var(--f-label); letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+.field input, .field select, .field textarea {
+  width: 100%; background: var(--ink); color: var(--bone); border: 1px solid var(--line); border-radius: 2px;
+  padding: 14px 14px; font: 400 16px/1.4 var(--f-body); transition: border-color .25s;
+}
+.field textarea { min-height: 130px; resize: vertical; }
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--teal); }
+.field .err { font-size: 14px; color: #f0a58c; }
+.form__foot { grid-column: 1 / -1; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.form__status { color: var(--mute); font-size: 15px; max-width: 46ch; }
+.form__status b { color: var(--bone); font-weight: 600; }
+@media (max-width: 860px) { .contacto__grid, .form { grid-template-columns: minmax(0, 1fr); } }
+
+/* ───────── FOOTER ───────── */
+.foot { padding-block: 36px; border-top: 1px solid var(--line); }
+.foot .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: center; }
+.foot small { color: var(--mute); font: 500 14px/1.4 var(--f-label); letter-spacing: .08em; }
+
+/* Animación de entrada (el estado inicial lo pone JS, así la página se ve completa sin JS) */
+.split-line { display: block; overflow: hidden; padding-bottom: .04em; }
+.split-line > span { display: inline-block; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+  .hero__media img { transform: none; }
+}
+</style>
 </head>
-
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg custom-navbar">
-            <div class="container">
-                <a class="navbar-brand" href="./index.html">BALANCE</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="./pages/nosotros.html">Nosotros</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./pages/contacto.html">Contacto</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./pages/productos.html">Productos</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <main>
-        <div id="carouselExampleCaptions" class="carousel slide">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-                    aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-                    aria-label="Slide 3"></button>
-            </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img width="1536" height="1024" decoding="async" fetchpriority="high" src="./img/entrenamiento-en-el-gimnasio-moderno.webp" class="d-block w-100" alt="Entrenador guiando un ejercicio con mancuernas">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Entrena con los mejores</h5>
-                        <p>Consigue tus entrenamientos personalizados</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img width="1536" height="1024" decoding="async" loading="lazy" src="./img/consulta-nutricional-en-cocina-moderna.webp" class="d-block w-100" alt="Consulta nutricional en una cocina moderna">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Consigue tus planes alimenticios</h5>
-                        <p>Los mejores profecionales en nutricion</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img width="1536" height="1024" decoding="async" loading="lazy" src="./img/suplementos-de-rendimiento-balance-en-detalle.webp" class="d-block w-100" alt="Suplementos de rendimiento Balance">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Tu sumplementacion necesaria</h5>
-                        <p>Productos de la mas alta calidad</p>
-                    </div>
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+<!-- ═════════ NAVEGACIÓN ═════════ -->
+<nav class="nav" id="nav" aria-label="Principal">
+  <div class="wrap">
+    <a class="brand" href="#inicio" aria-label="Balance Performance, inicio">BALANCE<span>.</span></a>
+    <ul>
+      <li><a href="#metodo">Método</a></li>
+      <li><a href="#programas">Programas</a></li>
+      <li><a href="#tienda">Tienda</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+    </ul>
+    <a class="btn" href="#contacto">Aplicá</a>
+  </div>
+</nav>
+
+<main>
+  <!-- ═════════ 1. HERO ═════════ -->
+  <section class="hero" id="inicio">
+    <div class="hero__media"><img src="img/entrenamiento-en-el-gimnasio-moderno.webp" width="1536" height="1024" fetchpriority="high" alt="Entrenador guiando un ejercicio con mancuerna a una atleta"></div>
+    <div class="hero__shade"></div>
+    <div class="hero__inner wrap">
+      <p class="label"><b>Balance Performance</b> &nbsp;·&nbsp; Round Rock, TX &nbsp;·&nbsp; 100% online</p>
+      <h1 class="hero__word display" aria-label="Balance">BALANC<span class="t">E</span></h1>
+      <div class="hero__foot">
+        <p>Entrenamiento, nutrición y suplementación bajo un mismo método. Para rendir más sin perder el equilibrio.</p>
+        <div class="hero__actions">
+          <a class="btn" href="#contacto">Aplicá ahora <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn--ghost" href="#programas">Ver programas</a>
         </div>
-        <section class="text-center custom-section mt-5 cta-glow">
-            <h2>Entrena con los mejores!</h2>
-            <div class="d-grid gap-2 text-center">
-                <a href="./pages/contacto.html">
-                    <button class="btn btn-primary" type="button">APLICA YA!</button>
-                </a>
-            </div>
-        </section>
-    </main>
-    <footer class="balance-footer">
-        <div class="container">
-            <div class="row gy-4 align-items-center text-center text-md-start">
+      </div>
+    </div>
+  </section>
 
-                <div class="col-12 col-md-4 d-flex flex-column justify-content-center">
-                    <p class="mb-1">+1 512 8259980</p>
-                    <p class="mb-1">balanceperformance@gmail.com</p>
-                    <p class="mb-0">5545 Sofia Pl, RR, TX</p>
-                </div>
+  <!-- ═════════ 2. CINTA ═════════ -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker__row" id="ticker">
+      <span>Fuerza</span><span>Constancia</span><span>Nutrición</span><span>Equilibrio</span><span>Rendimiento</span><span>Recuperación</span>
+      <span>Fuerza</span><span>Constancia</span><span>Nutrición</span><span>Equilibrio</span><span>Rendimiento</span><span>Recuperación</span>
+    </div>
+  </div>
 
-                <div class="col-12 col-md-4 d-flex align-items-center justify-content-center">
-                    <span class="footer-copy">© 2026 BALANCE performance · Derechos reservados</span>
-                </div>
+  <!-- ═════════ 3. MANIFIESTO ═════════ -->
+  <section class="manifesto" aria-labelledby="manif-t">
+    <div class="wrap">
+      <p class="label" id="manif-t">Manifiesto</p>
+      <div>
+        <p class="manifesto__text" data-words>No existen soluciones mágicas. Existen <em>procesos bien guiados</em>, personalizados y construidos sobre hábitos reales.</p>
+        <p class="manifesto__sign">Por eso unimos en un solo lugar a entrenadores, nutricionistas y suplementación de calidad. Cada plan se arma alrededor de tu objetivo y de tu vida, no al revés.</p>
+      </div>
+    </div>
+  </section>
 
-                <div
-                    class="col-12 col-md-4 d-flex align-items-center justify-content-center justify-content-md-end gap-3">
-                    <a class="social-link" href="#"><ion-icon name="logo-facebook"></ion-icon></a>
-                    <a class="social-link" href="#"><ion-icon name="logo-instagram"></ion-icon></a>
-                    <a class="social-link" href="#"><ion-icon name="logo-linkedin"></ion-icon></a>
-                    <a class="social-link" href="#"><ion-icon name="logo-youtube"></ion-icon></a>
-                </div>
-
-            </div>
+  <!-- ═════════ 4. MÉTODO: tres pilares en paneles horizontales ═════════ -->
+  <section class="metodo" id="metodo" aria-labelledby="metodo-t">
+    <div class="wrap metodo__head">
+      <h2 id="metodo-t">Un método,<br>tres pilares</h2>
+      <p class="label">Deslizá para recorrerlos</p>
+    </div>
+    <div class="metodo__track" id="track">
+      <article class="panel">
+        <img style="object-position:50% 85%" src="img/rendimiento-y-energia-en-el-gimnasio.webp" width="1536" height="1024" loading="lazy" alt="Atletas entrenando con cuerdas y barra en un gimnasio">
+        <div class="panel__body">
+          <p class="label">Pilar · Entrenamiento</p>
+          <h3 class="panel__word display">Entrená</h3>
+          <div class="panel__row"><p>Rutinas adaptadas a tu nivel y objetivo, con cargas planificadas y seguimiento profesional semana a semana.</p></div>
         </div>
-    </footer>
+      </article>
+      <article class="panel">
+        <img src="img/consulta-nutricional-en-cocina-moderna.webp" width="1536" height="1024" loading="lazy" alt="Nutricionista revisando un plan de comidas con una atleta">
+        <div class="panel__body">
+          <p class="label">Pilar · Nutrición</p>
+          <h3 class="panel__word display">Nutrí</h3>
+          <div class="panel__row"><p>Planes alimenticios a medida que acompañan el entrenamiento y se sostienen en el día a día.</p></div>
+        </div>
+      </article>
+      <article class="panel">
+        <img src="img/suplementos-de-rendimiento-balance-en-detalle.webp" width="1536" height="1024" loading="lazy" alt="Línea de suplementos Balance sobre una mesa">
+        <div class="panel__body">
+          <p class="label">Pilar · Suplementación</p>
+          <h3 class="panel__word display">Rendí</h3>
+          <div class="panel__row"><p>Suplementos de alta calidad y la guía para usarlos de forma segura según tu objetivo deportivo.</p></div>
+        </div>
+      </article>
+    </div>
+  </section>
 
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
+  <!-- ═════════ 5. PROGRAMAS ═════════ -->
+  <section class="programas" id="programas" aria-labelledby="prog-t">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="prog-t" data-reveal>Programas</h2>
+        <p>Cuatro formas de empezar. Todas 100% online y con un profesional detrás.</p>
+      </div>
+      <ul class="prog">
+        <li><a href="#contacto" data-interest="Entrenamiento personalizado">
+          <div class="prog__thumb"><img src="img/entrenamiento-personalizado.webp" width="900" height="600" loading="lazy" alt=""></div>
+          <h3>Entrenamiento personalizado</h3>
+          <p>Programas adaptados a tus objetivos, nivel y estilo de vida, con seguimiento profesional.</p>
+          <span class="prog__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a></li>
+        <li><a href="#contacto" data-interest="Nutrición personalizada">
+          <div class="prog__thumb"><img src="img/nutricion-11.webp" width="900" height="600" loading="lazy" alt=""></div>
+          <h3>Nutrición personalizada</h3>
+          <p>Planes alimenticios diseñados a medida para mejorar tu rendimiento, salud y bienestar.</p>
+          <span class="prog__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a></li>
+        <li><a href="#contacto" data-interest="Curso de suplementación">
+          <div class="prog__thumb"><img src="img/suplementacion-12.webp" width="900" height="600" loading="lazy" alt=""></div>
+          <h3>Curso de suplementación</h3>
+          <p>Aprendé a usar la suplementación de forma segura y efectiva según tus objetivos deportivos.</p>
+          <span class="prog__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a></li>
+        <li><a href="#contacto" data-interest="Planificación de entrenamiento">
+          <div class="prog__thumb"><img src="img/entrenamiento-23.webp" width="900" height="600" loading="lazy" alt=""></div>
+          <h3>Planificación de entrenamiento</h3>
+          <div>
+            <p>Organización de rutinas y cargas para optimizar resultados y evitar lesiones.</p>
+            <p class="sample">Semana de ejemplo · Lun fuerza 5×5 · Mié hipertrofia 4×10 · Vie potencia 6×3</p>
+          </div>
+          <span class="prog__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═════════ 6. TIENDA ═════════ -->
+  <section class="tienda" id="tienda" aria-labelledby="tienda-t">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="tienda-t" data-reveal>Tienda</h2>
+        <p>Suplementos e indumentaria con la marca Balance. Consultanos stock y envío.</p>
+      </div>
+
+      <div class="shelf-title"><h3>Suplementos</h3><span class="label">Fórmulas Balance</span></div>
+      <div class="grid4">
+        <article class="prod prod--studio">
+          <div class="prod__img"><img src="img/proteina.webp" width="600" height="900" loading="lazy" alt="Pote de Whey Protein Balance"><span class="prod__tag">Recuperación</span></div>
+          <h4>Whey Protein</h4><p>Proteína de alta calidad para la recuperación muscular y el desarrollo de masa magra.</p>
+          <button type="button" data-interest="Tienda: Whey Protein">Consultar</button>
+        </article>
+        <article class="prod prod--studio">
+          <div class="prod__img"><img src="img/creatina.webp" width="600" height="900" loading="lazy" alt="Pote de Creatina Balance"><span class="prod__tag">Fuerza</span></div>
+          <h4>Creatina</h4><p>Clave para mejorar fuerza, potencia y rendimiento en entrenamientos intensos.</p>
+          <button type="button" data-interest="Tienda: Creatina">Consultar</button>
+        </article>
+        <article class="prod prod--studio">
+          <div class="prod__img"><img src="img/bcaa.webp" width="600" height="900" loading="lazy" alt="Envase de BCAA Balance"><span class="prod__tag">Intra-entreno</span></div>
+          <h4>BCAA</h4><p>Aminoácidos esenciales que ayudan a reducir la fatiga y mejorar la recuperación.</p>
+          <button type="button" data-interest="Tienda: BCAA">Consultar</button>
+        </article>
+        <article class="prod prod--studio">
+          <div class="prod__img"><img src="img/pre-work.webp" width="600" height="900" loading="lazy" alt="Envase de Pre-Workout Balance"><span class="prod__tag">Energía</span></div>
+          <h4>Pre-Workout</h4><p>Fórmula para aumentar energía, enfoque y rendimiento antes de entrenar.</p>
+          <button type="button" data-interest="Tienda: Pre-Workout">Consultar</button>
+        </article>
+      </div>
+
+      <div class="shelf-title"><h3>Indumentaria</h3><span class="label">Equipo Balance</span></div>
+      <div class="grid4">
+        <article class="prod">
+          <div class="prod__img"><img src="img/remera.webp" width="600" height="900" loading="lazy" alt="Remera negra con logo Balance"></div>
+          <h4>Remera</h4><p>Liviana y resistente, para acompañarte en cada sesión.</p>
+          <button type="button" data-interest="Tienda: Remera">Consultar</button>
+        </article>
+        <article class="prod">
+          <div class="prod__img"><img src="img/musculosa.webp" width="600" height="900" loading="lazy" alt="Musculosa con logo Balance"></div>
+          <h4>Musculosa</h4><p>Libertad de movimiento para entrenamientos intensos.</p>
+          <button type="button" data-interest="Tienda: Musculosa">Consultar</button>
+        </article>
+        <article class="prod">
+          <div class="prod__img"><img src="img/gorras.webp" width="600" height="900" loading="lazy" alt="Gorra negra con logo Balance"></div>
+          <h4>Gorra</h4><p>Para entrenar al aire libre o completar el look.</p>
+          <button type="button" data-interest="Tienda: Gorra">Consultar</button>
+        </article>
+        <article class="prod">
+          <div class="prod__img"><img src="img/shaker.webp" width="600" height="900" loading="lazy" alt="Shaker Balance"></div>
+          <h4>Shaker</h4><p>Práctico y resistente para preparar tus batidos.</p>
+          <button type="button" data-interest="Tienda: Shaker">Consultar</button>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════ 7. NOSOTROS ═════════ -->
+  <section class="nosotros" id="nosotros" aria-labelledby="nos-t">
+    <div class="wrap">
+      <div class="nosotros__img" id="nosImg"><img src="img/rendimiento-y-energia-en-el-gimnasio-2.webp" width="1536" height="1024" loading="lazy" alt="Entrenamiento en el gimnasio de Balance"></div>
+      <div>
+        <p class="label">Nosotros · Desde 2022</p>
+        <h2 id="nos-t" data-reveal>Tu mejor versión, en equilibrio</h2>
+        <p>Balance Performance nació en 2022 con una idea simple: ayudar a las personas a alcanzar su mejor versión de forma equilibrada y sostenible.</p>
+        <p>Somos profesionales del entrenamiento, la nutrición y el rendimiento físico. Queremos construir una comunidad que vea el entrenamiento como una herramienta para vivir mejor, no solo como un objetivo estético.</p>
+        <div class="facts">
+          <div><strong>2022</strong><span>Año de fundación</span></div>
+          <div><strong>100%</strong><span>Online</span></div>
+          <div><strong>3</strong><span>Pilares en un plan</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════ 8. CONTACTO ═════════ -->
+  <section class="contacto" id="contacto" aria-labelledby="cont-t">
+    <div class="wrap">
+      <p class="contacto__word display" aria-hidden="true" id="aplica">Aplicá</p>
+      <div class="contacto__grid">
+        <div class="contacto__info">
+          <h2 id="cont-t">Empezá tu proceso</h2>
+          <p>Contanos tu objetivo y te respondemos con el plan que mejor se adapte a vos.</p>
+          <dl class="dl">
+            <div><dt>Email</dt><dd id="mail">balanceperformance@gmail.com</dd><button class="copy" type="button" data-copy="mail">Copiar</button></div>
+            <div><dt>Teléfono</dt><dd id="tel">+1 512 825 9980</dd><button class="copy" type="button" data-copy="tel">Copiar</button></div>
+            <div><dt>Dirección</dt><dd><a href="https://www.google.com/maps?q=5545%20Sofia%20Pl,%20Round%20Rock,%20TX%2078665" target="_blank" rel="noopener">5545 Sofia Pl, Round Rock, TX 78665</a></dd><span></span></div>
+            <div><dt>Modalidad</dt><dd>100% online</dd><span></span></div>
+          </dl>
+        </div>
+        <form class="form" id="form" novalidate>
+          <div class="field"><label for="f-nombre">Nombre</label><input id="f-nombre" name="nombre" autocomplete="name" value=""><span class="err" hidden></span></div>
+          <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="nombre@correo.com"><span class="err" hidden></span></div>
+          <div class="field field--full"><label for="f-interes">Me interesa</label>
+            <select id="f-interes" name="interes">
+              <option>Entrenamiento personalizado</option>
+              <option>Nutrición personalizada</option>
+              <option>Curso de suplementación</option>
+              <option>Planificación de entrenamiento</option>
+              <option>Tienda: Whey Protein</option><option>Tienda: Creatina</option><option>Tienda: BCAA</option><option>Tienda: Pre-Workout</option>
+              <option>Tienda: Remera</option><option>Tienda: Musculosa</option><option>Tienda: Gorra</option><option>Tienda: Shaker</option>
+            </select></div>
+          <div class="field field--full"><label for="f-msg">Tu objetivo</label><textarea id="f-msg" name="mensaje" placeholder="Ej.: quiero ganar fuerza entrenando 3 veces por semana"></textarea></div>
+          <div class="form__foot">
+            <button class="btn" type="submit">Enviar solicitud <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+            <p class="form__status" id="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <a class="brand" href="#inicio">BALANCE<span>.</span></a>
+    <small>© 2026 Balance Performance · Round Rock, TX · <a href="v1/">Versión anterior</a></small>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(() => {
+  const $ = (s, c = document) => c.querySelector(s);
+  const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const nav = $('#nav');
+
+  /* ── Nav sólida al bajar ── */
+  const onScroll = () => nav.classList.toggle('is-solid', scrollY > 40);
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  /* ── Formulario: elegir interés desde programas y tienda ── */
+  const sel = $('#f-interes');
+  let lenis = null;
+  const goTo = (id) => {
+    const el = $(id); if (!el) return;
+    lenis ? lenis.scrollTo(el, { offset: -20, duration: 1.4 }) : el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+  };
+  $$('[data-interest]').forEach(el => el.addEventListener('click', e => {
+    e.preventDefault(); sel.value = el.dataset.interest; goTo('#contacto');
+    setTimeout(() => $('#f-nombre').focus({ preventScroll: true }), 900);
+  }));
+  $$('a[href^="#"]:not([data-interest])').forEach(a => a.addEventListener('click', e => {
+    const id = a.getAttribute('href'); if (id.length < 2) return; e.preventDefault(); goTo(id);
+  }));
+
+  /* ── Copiar email / teléfono ── */
+  $$('[data-copy]').forEach(b => b.addEventListener('click', () => {
+    const el = $('#' + b.dataset.copy), txt = el.textContent.trim();
+    const done = () => { b.textContent = 'Copiado'; setTimeout(() => b.textContent = 'Copiar', 1600); };
+    const fallback = () => { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Seleccionado'; };
+    try { navigator.clipboard.writeText(txt).then(done, fallback); } catch { fallback(); }
+  }));
+
+  /* ── Envío: valida y prepara el correo ── */
+  const form = $('#form'), status = $('#status');
+  const setErr = (input, msg) => { const e = input.parentElement.querySelector('.err'); e.textContent = msg; e.hidden = !msg; input.setAttribute('aria-invalid', !!msg); };
+  ['f-nombre', 'f-email'].forEach(id => $('#' + id).addEventListener('input', e => setErr(e.target, '')));
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const n = $('#f-nombre'), m = $('#f-email'); let ok = true;
+    if (!n.value.trim()) { setErr(n, 'Escribí tu nombre para saber cómo llamarte.'); ok = false; }
+    if (!/^\S+@\S+\.\S+$/.test(m.value.trim())) { setErr(m, 'Revisá el email: falta el @ o el dominio.'); ok = false; }
+    if (!ok) return;
+    const body = `Nombre: ${n.value}\nEmail: ${m.value}\nInterés: ${sel.value}\n\n${$('#f-msg').value}`;
+    const href = `mailto:balanceperformance@gmail.com?subject=${encodeURIComponent('Solicitud: ' + sel.value)}&body=${encodeURIComponent(body)}`;
+    status.innerHTML = 'Abrimos tu correo con la solicitud lista. Si no se abrió, escribinos a <b>balanceperformance@gmail.com</b>.';
+    try { location.href = href; } catch {}
+  });
+
+  /* ═════════ MOVIMIENTO (GSAP + ScrollTrigger + Lenis) ═════════ */
+  if (reduce || !window.gsap || !window.ScrollTrigger) return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Scroll suave
+  if (window.Lenis) {
+    lenis = new Lenis({ lerp: 0.09 });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
+    document.documentElement.classList.add('lenis');
+  }
+
+  // Divide un título en letras
+  const word = $('.hero__word');
+  const chars = [];
+  [...word.childNodes].forEach(node => {
+    const isT = node.nodeType === 1;
+    [...node.textContent].forEach(c => {
+      const s = document.createElement('span'); s.className = 'ch' + (isT ? ' t' : ''); s.textContent = c; s.setAttribute('aria-hidden', 'true'); chars.push(s);
+    });
+  });
+  word.replaceChildren(...chars);
+
+  /* 1. Hero: entrada + toma continua que empuja la cámara hacia la palabra */
+  gsap.from(chars, { yPercent: 110, opacity: 0, duration: 1.1, ease: 'expo.out', stagger: 0.05, delay: 0.1 });
+  gsap.from('.hero .label, .hero__foot', { y: 24, opacity: 0, duration: 1, ease: 'power3.out', delay: 0.55, stagger: 0.12 });
+  gsap.timeline({ scrollTrigger: { trigger: '.hero', start: 'top top', end: '+=90%', scrub: 0.6, pin: true } })
+    .to('.hero__media img', { scale: 1.32, yPercent: 4, filter: 'saturate(.4) contrast(1.1) brightness(.55)', ease: 'none' }, 0)
+    .to(chars, { yPercent: (i) => -30 - i * 9, ease: 'none' }, 0)
+    .to(word, { scale: 1.12, transformOrigin: '0% 100%', ease: 'none' }, 0)
+    .to('.hero__foot, .hero .label', { opacity: 0, y: -30, ease: 'none' }, 0)
+    .to(word, { opacity: 0, ease: 'none', duration: 0.35 }, 0.65);
+
+  /* 2. Cinta que avanza con el scroll */
+  gsap.to('#ticker', { xPercent: -50, ease: 'none', scrollTrigger: { trigger: '.ticker', start: 'top bottom', end: 'bottom top', scrub: 0.4 } });
+
+  /* 3. Manifiesto: las palabras se encienden al leer */
+  const mt = $('[data-words]');
+  const words = [];
+  const walk = (node, wrapEm) => [...node.childNodes].forEach(n => {
+    if (n.nodeType === 3) n.textContent.split(/(\s+)/).forEach(t => {
+      if (!t.trim()) { words.push(document.createTextNode(t)); return; }
+      const s = document.createElement('span'); s.className = 'w'; s.textContent = t;
+      if (wrapEm) { const em = document.createElement('em'); em.appendChild(s); words.push(em); } else words.push(s);
+    }); else walk(n, true);
+  });
+  walk(mt, false); mt.replaceChildren(...words);
+  gsap.fromTo($$('.w', mt), { opacity: 0.16 }, { opacity: 1, stagger: 0.08, ease: 'none',
+    scrollTrigger: { trigger: mt, start: 'top 78%', end: 'bottom 45%', scrub: true } });
+
+  /* 4. Método: recorrido horizontal fijado (solo pantallas grandes) */
+  const mm = gsap.matchMedia();
+  mm.add('(min-width: 900px)', () => {
+    const sec = $('#metodo'), track = $('#track');
+    sec.classList.add('is-h');
+    const dist = () => track.scrollWidth - innerWidth;
+    const tween = gsap.to(track, { x: () => -dist(), ease: 'none',
+      scrollTrigger: { trigger: sec, start: 'top top', end: () => '+=' + dist(), scrub: 0.8, pin: true, invalidateOnRefresh: true } });
+    $$('.panel', track).forEach(p => {
+      gsap.fromTo($('img', p), { xPercent: -6 }, { xPercent: 6, ease: 'none', scrollTrigger: { trigger: p, containerAnimation: tween, start: 'left right', end: 'right left', scrub: true } });
+      gsap.from($('.panel__word', p), { yPercent: 40, opacity: 0, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: p, containerAnimation: tween, start: 'left 70%' } });
+    });
+    return () => sec.classList.remove('is-h');
+  });
+  mm.add('(max-width: 899px)', () => {
+    $$('.panel').forEach(p => gsap.from($('.panel__word', p), { yPercent: 40, opacity: 0, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: p, start: 'top 70%' } }));
+  });
+
+  /* 5. Títulos de sección: entrada por máscara */
+  $$('[data-reveal]').forEach(h => {
+    gsap.from(h, { clipPath: 'inset(0 0 100% 0)', y: 40, duration: 1.1, ease: 'expo.out', scrollTrigger: { trigger: h, start: 'top 85%' } });
+  });
+
+  /* 6. Programas y productos: entrada escalonada */
+  gsap.from('.prog li', { y: 40, opacity: 0, duration: .9, ease: 'power3.out', stagger: .1, scrollTrigger: { trigger: '.prog', start: 'top 80%' } });
+  $$('.grid4').forEach(g => gsap.from($$('.prod', g), { y: 60, opacity: 0, duration: 1, ease: 'power3.out', stagger: .09, scrollTrigger: { trigger: g, start: 'top 82%' } }));
+
+  /* 7. Nosotros: la foto se abre como un telón y se desplaza en paralaje */
+  gsap.fromTo('#nosImg', { clipPath: 'inset(18% 12% 18% 12%)' }, { clipPath: 'inset(0% 0% 0% 0%)', ease: 'none', scrollTrigger: { trigger: '#nosImg', start: 'top 90%', end: 'top 30%', scrub: true } });
+  gsap.fromTo('#nosImg img', { yPercent: -10 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: '#nosImg', start: 'top bottom', end: 'bottom top', scrub: true } });
+
+  /* 8. Contacto: la palabra APLICÁ entra de costado con el scroll */
+  gsap.fromTo('#aplica', { xPercent: 18 }, { xPercent: -4, ease: 'none', scrollTrigger: { trigger: '.contacto', start: 'top bottom', end: 'top 20%', scrub: 0.6 } });
+
+  addEventListener('load', () => ScrollTrigger.refresh());
+})();
+</script>
+
 </body>
-
 </html>
