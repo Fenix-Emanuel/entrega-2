@@ -232,6 +232,12 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .foot .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: center; }
 .foot small { color: var(--mute); font: 500 14px/1.4 var(--f-label); letter-spacing: .08em; }
 
+/* Sello de Ignis Studio */
+.ignis-seal { display: inline-flex; align-items: center; gap: 8px; padding: 7px 13px; border: 1px solid var(--line); border-radius: 999px; color: var(--mute); font: 500 14px/1 var(--f-label); letter-spacing: .06em; text-decoration: none; transition: border-color .25s, color .25s; }
+.ignis-seal:hover { border-color: #FF5A1F; color: var(--bone); }
+.ignis-seal__mark { display: inline-flex; align-items: center; gap: 6px; color: var(--bone); font: 800 15px/1 var(--f-display); letter-spacing: .12em; }
+.ignis-seal__mark i { width: 7px; height: 7px; border-radius: 50%; background: #FF5A1F; box-shadow: 0 0 10px 2px rgba(255, 90, 31, .6); }
+
 /* Animación de entrada (el estado inicial lo pone JS, así la página se ve completa sin JS) */
 .split-line { display: block; overflow: hidden; padding-bottom: .04em; }
 .split-line > span { display: inline-block; }
@@ -485,6 +491,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   <div class="wrap">
     <a class="brand" href="#inicio">BALANCE<span>.</span></a>
     <small>© 2026 Balance Performance · Round Rock, TX · <a href="v1/">Versión anterior</a></small>
+    <a class="ignis-seal" href="https://theignisstudio.com" target="_blank" rel="noopener">Diseño y desarrollo por <span class="ignis-seal__mark"><i aria-hidden="true"></i>IGNIS</span></a>
   </div>
 </footer>
 
